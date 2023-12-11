@@ -1,0 +1,77 @@
+#include<iostream>
+using namespace std;
+#define size 5
+class queue{
+	int arr[size];
+	int front;
+	int back;
+	public:
+		queue(){
+			front=back=-1;
+		}
+		bool addorder(int x){
+			if(back==-1){
+				front=back=0;
+				arr[back]=x;
+				return true;
+			}
+			if(front==(back+1)%size){
+				return false;
+			}
+			back=(back+1)%size;
+			arr[back]=x;
+			return true;
+		}
+		void serve(){
+			if(back==-1&&front==-1){
+				cout<<"Is empty";
+				
+			}
+			if(back==front){
+				back=front=-1;
+			}
+			cout<<arr[front];
+			front=(front+1)%size;
+		}
+		void display(){
+			for (int i=front;i!=back+1;i=(i+1)%size){
+				cout<<arr[i]<<" ";
+			}
+		}
+	
+	
+	
+};
+int main(){
+	queue q;
+	int ch;
+	int id=0;
+	do{
+	cout<<"Enter your choice";
+	cin>>ch;
+	switch(ch){
+		
+		case 1:
+			id++;
+			if(q.addorder(id)){
+			cout<<"Your order is taken :"<<" is"<<id<<endl;
+			}
+			else{
+				id--;
+			}
+			break;
+		case 2:
+			cout<<"order served is :"<<endl;
+			q.serve();
+			break;
+		case 3:
+			q.display();
+			break;
+			
+			
+			 
+	}
+	}while(ch!=4);
+	
+	
+}
