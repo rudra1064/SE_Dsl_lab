@@ -1,0 +1,29 @@
+def linearSearch(a,key):
+    for i in range (len(a)):
+        if(a[i]==key):
+            return i+1
+    return -1
+def sentinelSearch(a,key):
+    last=a[-1]
+    a[-1]=key
+    i=0
+    while a[i]!=key:
+        i+=1
+    if(a[i]!=len(a)-1):
+        return i
+    if(last==key):
+        return len(a)-1
+    else:
+        return -1
+
+
+
+arr=[1,4,5,6,7,8,2,9,0]
+# if linearSearch(arr,7)==-1:
+#     print("Element is not present")
+# else:
+#     print("Element is present at ",linearSearch(arr,7),"position")
+if sentinelSearch(arr,2)==-1:
+    print("absent")
+else:
+    print("Element present at",sentinelSearch(arr,2),"position")
