@@ -1,0 +1,83 @@
+#string operations 
+# 1. To display word with the longest length :
+# 2. To determines the frequency of occurrence of particular character in the string
+# 3. To check whether given string is palindrome or not :
+# 4. To display index of first appearance of the substring :
+# 5. To count the occurrences of each word in a given string :
+def longestlength(str):
+    longest=""
+    res=0
+    current_len=0
+    n=len(str)
+    for i in range (n):
+        if(str[i]!=' '):
+            longest+=str[i]
+            current_len+=1
+        else:
+            res=max(res,current_len)
+            current_len=0
+            longest=""
+    return max(res,current_len),longest
+def freqofchar(str,a):
+    count=0
+    for i in str:
+        if i==a:
+            count+=1
+    return count
+def ispalindrome(str):
+    for i in range (0,int(len(str)/2)):
+        if str[i]!=str[len(str)-i-1]:
+            return False
+    return True
+def substring(mainstr,sub):
+    res=[]
+    for i in range (0,len(mainstr)):
+        k=i
+        flag=0
+        for j in range (len(sub)):
+            if k >= len(mainstr) or mainstr[k] != sub[j]:
+                flag = 1
+                break
+        k += 1
+        if(flag==0):
+            res.append(i)
+    return res
+def freq(str):
+    str=str.split()
+    str2=[]
+    for i in str:
+        if i not in str2:
+            str2.append(i)
+    print("Frequency of each Word is :")
+    for i in range (0,len(str2)):
+        print("frequency of",str2[i],"is",str.count(str2[i]))
+
+
+#main
+
+print("-------------Main menu---------------")
+print("1.To display word with longest length\n2.To determines the frequency of occurrence of particular character in the string\n3. To check whether given string is palindrome or not :\n4. To display index of first appearance of the substring :\n 5. To count the occurrences of each word in a given string :")
+n=int(input("Enter your choice :"))
+if n==1:
+    a=str(input("Enter the String :"))
+    print("The Longest length and the Word Are",longestlength(a))
+
+elif n==2:
+    a=str(input("Enter the String :"))
+    b=str(input("Enter the Character"))
+    print("The number of occurence of ",b,"is",freqofchar(a,b))
+elif n==3:
+    a=str(input("Enter the String :"))
+    if ispalindrome(a)==True:
+        print("Palindrome")
+    else:
+        print("Not a palindrome")
+elif n==4:
+    a=str(input("Enter the String :"))
+    sub=str(input("Enter the subString"))
+    print(substring(a,sub))
+elif n==5:
+     a=str(input("Enter the String :"))
+     print(freq(a))
+else:
+    print("Invalid Choice")
