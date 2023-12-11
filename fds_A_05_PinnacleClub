@@ -1,0 +1,119 @@
+#include<iostream>
+using namespace std;
+class Node{
+    public:
+    string name;
+    int val;
+    Node*next;
+    Node(int data,string s1){	
+        val=data;
+        name=s1;   
+        next=NULL;
+    }
+}
+;
+class LinkedList{
+    public:
+    Node*head;
+    LinkedList(){
+        head=NULL;
+            }
+    void insertPresident(int value,string name){
+        Node*new_node=new Node(value,name);
+        new_node->next=head;
+        head=new_node;
+    }    
+    void insertSecretary(int value,string name){
+        Node*new_node=new Node(value,name);
+        Node*temp=head;
+        if(head==NULL){
+            head=new_node;
+            return;
+        }
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        temp->next=new_node;
+    }
+    //insert member
+    void insertMember(int value,string name){
+        Node*new_node=new Node(value,name);
+        new_node->next=head->next;
+        head->next=new_node;      
+    }
+    void traverse(){
+        Node*temp=head;
+        while(temp!=NULL){
+            cout<<temp->val<<" "<<temp->name<<"->";
+            temp=temp->next;
+        }
+        cout<<"Null"<<endl;;
+    }
+    void deletePresident(){
+        if(head==NULL){
+            cout<<"linked list is empty";
+        }
+        Node*temp=head;
+        head=head->next;
+        delete (temp);
+    }
+    void deleteSecretary(){
+        Node*second_last=head;
+        while(second_last->next->next!=NULL){
+            second_last=second_last->next;
+        }
+        Node*temp=second_last->next;
+        second_last->next=NULL;
+        delete (temp);
+    }
+    void deleteMember(){
+       Node*todelete=head->next;
+       head->next=head->next->next;
+       delete todelete;
+    }
+};
+ Node*mergeLinkedList(Node *&head1,Node *&head2){
+    	Node*temp=new Node(-1,"");
+    	Node*ptr1=head1;
+    	Node*ptr2=head2;
+    	Node*ptr3=temp;
+    	
+    	while(ptr1 && ptr2){
+    		if(ptr1->val<ptr2->val){
+    			ptr3->next=ptr1;
+    			ptr1=ptr1->next;
+			}
+			else{
+				ptr3->next=ptr2;
+				ptr2=ptr2->next;
+			}
+			ptr3=ptr3->next;
+		}
+	    if(ptr1){
+	    	ptr3->next=ptr1;
+		}
+		else{
+			ptr3->next=ptr2;
+		}	
+		return temp->next;
+		
+		
+	}
+int main(){
+ string name,name1,name2;
+ cout<<"Enter the Name";
+ cin>>name;
+ LinkedList l1;
+ l1.insertPresident(0,name);
+ cin>>name2;
+ l1.insertSecretary(2,name2);
+ cin>>name1;
+ l1.insertMember(3,name1);
+ l1.insertMember(2,name1);
+ l1.insertMember(1,name1);
+ l1.traverse();
+ l1.deletePresident();
+ l1.deleteSecretary();
+ l1.deleteMember();
+ l1.traverse();
+ 
