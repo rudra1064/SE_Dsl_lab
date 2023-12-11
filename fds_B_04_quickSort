@@ -1,0 +1,61 @@
+def percentage_partition(a,start,end):
+    pivot = a[start]
+    lower_bound = start + 1
+    upper_bound = end
+
+    while True:
+        while lower_bound <= upper_bound and a[lower_bound] <= pivot:
+            lower_bound += 1
+
+        while lower_bound <= upper_bound and a[upper_bound] >= pivot:
+            upper_bound -= 1
+
+        if lower_bound <= upper_bound:
+            a[lower_bound],a[upper_bound] = a[upper_bound],a[lower_bound]
+
+        else:
+            break
+
+
+    a[start],a[upper_bound] = a[upper_bound],a[start]
+
+    return upper_bound
+
+def Quick_Sort(a,start,end):
+    while start < end:
+        partition = percentage_partition(a,start,end)
+        Quick_Sort(a,start,partition-1)
+        Quick_Sort(a,partition+1,end)
+        return a
+
+#<--------------------------------------------------------------------------------------------------------------------->
+
+# Function for Displaying Top Five Percentages of Students
+
+def display_top_five(a):
+    print("Top Five Percentages are : ")
+    if len(a) < 5:
+        start, stop = len(a) - 1, -1
+    else:
+        start, stop = len(a) - 1, len(a) - 6
+
+    for i in range(start, stop, -1):
+        print(a[i],sep="\n")
+
+
+#<--------------------------------------------------------------------------------------------------------------------->
+
+# Main
+
+unsorted_percentage = [1,4,7,9,3,5,0]
+sorted_percentage = []
+flag = 1
+
+
+
+print("Percentages of Students after performing Quick Sort : ")
+sorted_percentage = Quick_Sort(unsorted_percentage,0,len(unsorted_percentage)-1)
+print(sorted_percentage)
+a = input("Do you want to display the Top 5 Percentages of Students (yes/no) : ")
+if a == 'yes':
+    display_top_five(sorted_percentage)
