@@ -1,0 +1,102 @@
+#include<iostream>
+#include<string.h>
+#define max 50
+using namespace std;
+char a[max];
+int tos=-1;
+
+void push(int c)
+{
+    if(tos==max-1)
+    cout<<"stack is full";
+    else
+    {
+	tos++;
+	a[tos] = c;
+	a[tos+1]='\0';
+    }
+}
+
+void reverse()
+{
+	char str[max];
+	
+	cout<<"\nReverse string is : ";
+		
+	for(int i=tos; i>=0; i--)
+	{
+		cout<<a[i];
+	}
+	
+}
+
+/*
+void convert(char str[])
+{
+	int j,k,len = strlen(str);
+
+	for(j=0, k=0; j<len; j++)
+	{
+		if( ( (int)str[j] >= 97 && (int)str[j] <=122 ) || ( (int)str[j] >= 65 && (int)str[j] <=90 ))
+		{
+			if( (int)str[j] <=90 )
+			{
+				str[k] = (char)( (int)str[j] + 32 );
+			}else
+			{
+				str[k] = str[j];				
+			}
+
+			k++;			
+		}
+	}
+	str[k]='\0';
+
+	cout<<endl<<"Converted String : "<<str<<"\n";
+}
+
+
+
+*/
+int palindrome()
+{	
+	//char str[max];
+	int i,j;		
+
+	for(i=tos,j=0;i>=(tos/2),j<=(tos/2);i--,j++)
+	{
+		if(a[i]!=a[j])
+		return 0;
+		else
+		 return 1;
+	}
+
+}
+
+
+int main()
+{
+    int a;
+    int i=0;
+	char str[max];
+	cout<<"\nEnter string for checking reversed and palindrome :";
+	
+	cin.getline(str , 50);
+	
+//	stack.convert(str);
+	
+	while(str[i] != '\0')
+	{
+	   push(str[i]);
+		i++;
+	}
+
+	a=palindrome();
+		if( a== 1)
+		cout<<"\n\nString is palindrome...";
+	else
+		cout<<"\n\nString is not palindrome...";
+
+	reverse();
+	
+}
